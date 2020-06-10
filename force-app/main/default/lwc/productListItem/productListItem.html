@@ -1,0 +1,28 @@
+<template>
+    <div key={product.Id}>
+        <h3>{product.Name}</h3>
+        <p>{product.Description}</p>
+        <p>Today's Price: {price}</p>
+
+        <div>
+            <div style="font-weight:bold;">Price book Details:</div>
+            <div style="display:block;background-color:#CFCFCF">
+                <div style="font-weight:bold;display:inline-block;width:180px;">Price Book</div>
+                <div style="font-weight:bold;display:inline-block;width:80px;">Is Standard</div>
+                <div style="font-weight:bold;display:inline-block;width:80px;">Price</div>
+            </div>
+            <template
+            for:each={product.PricebookEntries}
+            for:item="pricebookEntry"
+            >
+            <c-product-price-list-item 
+                key={pricebookEntry.Id}
+                pricebookentry={pricebookEntry}
+            ></c-product-price-list-item >
+        </template>
+    
+        </div>
+
+    </div>
+    <lightning-button label="Add to Cart" title="Add to Cart" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+</template>

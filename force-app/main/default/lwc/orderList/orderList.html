@@ -1,0 +1,26 @@
+<template>
+    <div>
+        Choose an Existing Order ... 
+    </div>
+    
+    <lightning-combobox
+        data-id="orderList"
+        name="orders"
+        label="Existing Orders"
+        value={value}
+        placeholder="Select an Existing Order"
+        options={_orderItems}
+        onchange={handleChange}
+    ></lightning-combobox>
+
+    <div>
+        ... or Create A new One to Get Started.<br/>
+        <lightning-input type="text" onchange={handleChange}  data-id="orderName" label="Enter some text" placeholder="Enter An Order Name"></lightning-input>
+        <lightning-button 
+            name="submit"
+            onclick={handleClick}
+            label="Create Order">
+        </lightning-button>
+    </div>
+    
+</template>

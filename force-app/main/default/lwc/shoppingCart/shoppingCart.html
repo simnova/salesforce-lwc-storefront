@@ -1,0 +1,20 @@
+<template>
+    <template if:true={lineItems}>
+        Shopping Cart:
+        <template
+            for:each={lineItems}
+            for:item="lineItem"
+        >
+            <c-cart-item
+                key={lineItem.key}
+                line-item={lineItem}
+                onremoved={handleProductRemoved}
+            ></c-cart-item>
+        </template>
+        <div>Total: {grandTotal}</div>
+
+
+
+
+    </template>
+</template>

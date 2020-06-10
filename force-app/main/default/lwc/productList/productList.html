@@ -1,0 +1,18 @@
+<template>
+    Products<br/>
+    <template if:true={products.data}>
+        <template
+            for:each={products.data}
+            for:item="product"
+            >
+            <c-product-list-item 
+                key={product.Id}
+                product={product}
+                onselected={handleProductSelected}
+            ></c-product-list-item>
+        </template>
+    </template>
+    <template if:false={products.data}>
+        No Products Available
+    </template>
+</template>
