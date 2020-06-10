@@ -1,6 +1,10 @@
 <template>
     <template if:true={lineItems}>
-        Shopping Cart:
+        Shopping Cart: <br/>
+        Order Name: {_order.Name}<br/>
+        Order Status: {_order.Status}<br/>
+        Order Total Amount: {_order.TotalAmount}<br/>
+        Order ID:  {_order.Id}<br/>
         <template
             for:each={lineItems}
             for:item="lineItem"

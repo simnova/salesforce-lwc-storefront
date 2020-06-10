@@ -1,9 +1,13 @@
-import { LightningElement, track, api} from 'lwc';
+import { LightningElement, track, wire} from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent'
 import getAllOrders from '@salesforce/apex/OrderController.getAllOrders';
 import getAccountByName from '@salesforce/apex/AccountController.getAccountByName';
 import { createRecord } from 'lightning/uiRecordApi';
 import Id from '@salesforce/user/Id';
+import { fireEvent } from 'c/pubsub';
+import { CurrentPageReference } from 'lightning/navigation';
+
+
 
 //Order Schema
 import ORDER_OBJECT from '@salesforce/schema/Order';
@@ -35,6 +39,8 @@ export default class OrderList extends LightningElement {
     _selectedOrderId = null;
     _orderName = null;
 
+    @wire(CurrentPageReference) pageRef;
+
     createAccount(accountName,ownerId) {
         return new Promise((resolve,reject) => {
             const fields = {};
@@ -58,6 +64,7 @@ export default class OrderList extends LightningElement {
         switch(event.target.dataset.id){
             case "orderList":
                 this._selectedOrderId = event.detail.value;
+                fireEvent(this.pageRef, 'orderSelected', {orderId: this._selectedOrderId}); // Dispatch Event so Shopping Cart can load this order
                 break;
             case "orderName":
                 this._orderName = event.detail.value;
@@ -78,7 +85,6 @@ export default class OrderList extends LightningElement {
         } catch (error) {
             console.error(`Error when creating Order: ${this._orderName}`, error);
         }
-        
     }
 
     lookupOrCreateAccount(accountName,ownerId){

@@ -2,12 +2,14 @@ import { LightningElement, wire, track } from 'lwc';
 import { registerListener, unregisterAllListeners } from 'c/pubsub';
 import { CurrentPageReference } from 'lightning/navigation';
 import { determinePrice } from 'c/priceManager';
+import getOrderDetails from '@salesforce/apex/OrderController.getOrderDetails';
 
 export default class ShoppingCart extends LightningElement {
   
     lineItemData = new Map();
     lineItems = [];
     grandTotal = 0;
+    _order = {};
     /*
     get lineItems() {
         return this._lineItems;
@@ -15,6 +17,22 @@ export default class ShoppingCart extends LightningElement {
 */
 
     @wire(CurrentPageReference) pageRef;
+
+    handleOrderSelected(orderId){
+        try {
+            getOrderDetails(orderId)
+                .then(orders => {
+                    console.log('Order Lookup: Success!')
+                    console.log(orders);
+                    this._order = orders[0];
+                })
+                .catch(error => {
+                    console.error(`Error encountered when looking up Order Details`, error)
+                })
+        } catch(error) {
+            console.error(`Error encountered when looking up Order Details`, error)
+        }
+    }
 
     handleProductSelected(product){
         console.log('receiving event');
@@ -38,7 +56,6 @@ export default class ShoppingCart extends LightningElement {
             console.error("error when adding item",error);
         }
         console.log(`size:${this.lineItemData.size}`);
-        
     }
 
     handleProductRemoved(event) {
@@ -77,6 +94,7 @@ export default class ShoppingCart extends LightningElement {
     connectedCallback() {
         console.log('registered and connected');
         registerListener('productSelected', this.handleProductSelected, this);
+        registerListener('orderSelected', this.handleOrderSelected, this);
     }
 
     disconnectedCallback() {
