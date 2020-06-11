@@ -3,5 +3,8 @@
         <div style="display:inline-block;width:180px;">{_name}</div>
         <div style="display:inline-block;width:80px;">{_isStandard}</div>
         <div style="display:inline-block;width:80px;">${_unitPrice}</div>
+        <div style="display:inline-block;width:80px;">
+            <lightning-button label="Add to Cart" title="Add to Cart" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        </div>
     </div>
 </template>

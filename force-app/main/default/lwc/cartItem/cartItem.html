@@ -1,4 +1,4 @@
 <template>
-    <div key={lineItem.product.Id}>{lineItem.quantity} - {lineItem.product.Name} - {lineItem.price} - {lineItem.total} </div>
+    <div>{orderItem.Quantity} - {orderItem.Product2.Name} - {orderItem.UnitPrice} - {orderItem.TotalPrice} </div>
     <lightning-button label="Remove from Cart" title="Remove from Cart" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
 </template>

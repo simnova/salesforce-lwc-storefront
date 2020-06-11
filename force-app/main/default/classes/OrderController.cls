@@ -1,7 +1,7 @@
 public with sharing class OrderController {
     
-    @AuraEnabled(Cacheable=true)
-    public static Order[] getOrderDetails(Id orderId) {
+    @AuraEnabled()
+    public static Order getOrderDetails(Id orderId) {
         return [
             SELECT 
                 o.Id, 
@@ -14,12 +14,16 @@ public with sharing class OrderController {
                         Id, 
                         UnitPrice, 
                         Quantity, 
-                        OrderId 
+                        OrderId,
+                        PricebookEntryId,
+                        Product2.Name,
+                        TotalPrice
                     FROM OrderItems
                 ) 
             FROM Order o
             WHERE o.Id =: orderId
-            WITH SECURITY_ENFORCED   
+            WITH SECURITY_ENFORCED
+            LIMIT 1 
         ];
     }
 

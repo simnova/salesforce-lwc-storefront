@@ -2,19 +2,19 @@ import { LightningElement, api , track} from 'lwc';
 
 export default class CartItem extends LightningElement {
 
-    _lineItem;
+    _orderItem;
     /** Line Item to display. */
     @api
-    get lineItem() {
-        return this._lineItem;
+    get orderItem() {
+        return this._orderItem;
     }
-    set lineItem(value) {
-        this._lineItem = value;
+    set orderItem(value) {
+        this._orderItem = value;
     }
 
     handleClick() {
         const removedEvent = new CustomEvent('removed', {
-            detail: this._lineItem.product.Id
+            detail: this._orderItem.Id
         });
         this.dispatchEvent(removedEvent);
     }

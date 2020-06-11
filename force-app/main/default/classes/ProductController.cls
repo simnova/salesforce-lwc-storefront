@@ -13,9 +13,11 @@ public with sharing class ProductController {
                 (
                     SELECT 
                       Id,
+                      Product2.Id,
                       UnitPrice,
                       PriceBook2.Name,
-                      PriceBook2.IsStandard
+                      PriceBook2.IsStandard,
+                      PriceBook2.Id
                     FROM  PricebookEntries
                 ) 
                 FROM   Product2 p

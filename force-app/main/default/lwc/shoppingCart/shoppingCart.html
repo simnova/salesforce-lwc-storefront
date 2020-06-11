@@ -1,17 +1,17 @@
 <template>
     <template if:true={lineItems}>
         Shopping Cart: <br/>
-        Order Name: {_order.Name}<br/>
-        Order Status: {_order.Status}<br/>
-        Order Total Amount: {_order.TotalAmount}<br/>
-        Order ID:  {_order.Id}<br/>
+        Order Name: {order.Name}<br/>
+        Order Status: {order.Status}<br/>
+        Order Total Amount: {order.TotalAmount}<br/>
+        Order ID:  {order.Id}<br/>
         <template
-            for:each={lineItems}
-            for:item="lineItem"
+            for:each={order.OrderItems}
+            for:item="orderItem"
         >
             <c-cart-item
-                key={lineItem.key}
-                line-item={lineItem}
+                key={orderItem.Id}
+                order-item={orderItem}
                 onremoved={handleProductRemoved}
             ></c-cart-item>
         </template>
