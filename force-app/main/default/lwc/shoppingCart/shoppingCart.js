@@ -46,11 +46,6 @@ export default class ShoppingCart extends LightningElement {
     get order(){
         return this._order;
     }
-    /*
-    get lineItems() {
-        return this._lineItems;
-    }
-*/
 
     @wire(CurrentPageReference) pageRef;
     
@@ -90,7 +85,6 @@ export default class ShoppingCart extends LightningElement {
                     reject(error);
                 });
         });
-
     }
 
     alterOrderItem(orderItemId,newQuantity){
@@ -171,10 +165,6 @@ export default class ShoppingCart extends LightningElement {
                 } catch (error) {
                     console.error("err when adding another", error)
                 }
-                
-                
-                
-                
             }else{
                 console.log("no order items");
                 try {
@@ -190,12 +180,7 @@ export default class ShoppingCart extends LightningElement {
                 } catch (error) {
                     console.error('some errr',error);
                 }
-                
-                
             }
-            
-            //look up proudct based on pricebook entry
-            //add t
         } catch (error) {
             
         }
@@ -248,35 +233,12 @@ export default class ShoppingCart extends LightningElement {
                     }
                 }
             }
-
-            /*
-
-            var key = event.detail
-            var value;
-            if (this.lineItemData.has(key)){
-                value = this.lineItemData.get(key);
-            }else {
-                return;
-            }
-            value.quantity--;
-        
-            value.price = determinePrice(value.product); ///  value.product.PricebookEntries[0].UnitPrice;
-            value.total = value.quantity * value.price;
-            value.key = `${key}-${value.quantity}`;
-            this.lineItemData.set(key,value); 
-            if(value.quantity === 0){
-                this.lineItemData.delete(key);
-            }
-            
-            this.lineItems = Array.from(this.lineItemData.values()); //need to be array for LWC
-            this.grandTotal = this.lineItems.reduce((accumlator,lineItem) =>  lineItem.total + accumlator,0);
-            */
         } catch (error) {
             console.error("error when adding item",error);
         }
 
 
-        fireEvent(this.pageRef, 'productSelected', event.detail);
+       // fireEvent(this.pageRef, 'productSelected', event.detail);
     }
 
     //LWC Lifecycle Hooks
